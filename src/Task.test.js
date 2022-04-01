@@ -6,12 +6,12 @@ describe('Tasks', () => {
         expect(task.title).toBe('Some Title');
     });
 
-    test('have a description', () => {
+    test('can have a description', () => {
         const task = new Task('Some Title', { description: 'A neat description' });
         expect(task.description).toBe('A neat description');
     });
 
-    test('have a deadline', () => {
+    test('can have a deadline', () => {
         const task = new Task('Some Title', { deadline: '2022-04-01' });
         expect(task.deadline).toBe('2022-04-01');
     });
