@@ -1,10 +1,10 @@
 export default class {
     #title;
-    #description;
+    #options;
     
-    constructor(title, description){
+    constructor(title, options = {}){
         this.#title = title;
-        this.#description = description;
+        this.#options = options;
     }
 
     get title(){
@@ -12,6 +12,6 @@ export default class {
     }
 
     get description(){
-        return this.#description;
+        return this.#options.description;
     }
 }
