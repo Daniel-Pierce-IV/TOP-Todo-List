@@ -10,4 +10,9 @@ describe('Tasks', () => {
         const task = new Task('Some Title', { description: 'A neat description' });
         expect(task.description).toBe('A neat description');
     });
+
+    test('have a deadline', () => {
+        const task = new Task('Some Title', { deadline: '2022-04-01' });
+        expect(task.deadline).toBe('2022-04-01');
+    });
 });
