@@ -14,4 +14,8 @@ export default class {
     get description(){
         return this.#options.description;
     }
+
+    get deadline(){
+        return this.#options.deadline;
+    }
 }
