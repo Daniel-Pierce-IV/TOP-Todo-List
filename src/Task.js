@@ -18,4 +18,8 @@ export default class {
     get deadline(){
         return this.#options.deadline;
     }
+
+    get note(){
+        return this.#options.note;
+    }
 }
