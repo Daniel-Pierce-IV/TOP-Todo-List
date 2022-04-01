@@ -5,4 +5,9 @@ describe('Tasks', () => {
         const task = new Task('Some Title');
         expect(task.title).toBe('Some Title');
     });
+
+    test('have a description', () => {
+        const task = new Task('Some Title', 'A neat description');
+        expect(task.description).toBe('A neat description');
+    });
 });
