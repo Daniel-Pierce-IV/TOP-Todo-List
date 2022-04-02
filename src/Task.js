@@ -5,6 +5,10 @@ export default class {
     constructor(title, options = {}){
         this.#title = title;
         this.#options = options;
+
+        if(this.#options.isDone === undefined){
+            this.#options.isDone = false;
+        }
     }
 
     get title(){
@@ -29,5 +33,9 @@ export default class {
 
     get subtasks(){
         return [...this.#options.subtasks];
+    }
+
+    get isDone(){
+        return this.#options.isDone;
     }
 }
