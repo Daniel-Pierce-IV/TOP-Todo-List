@@ -46,4 +46,8 @@ export default class {
     complete(){
         this.#options.isDone = true;
     }
+
+    addSubtask(task){
+        return this.#options.subtasks.push(task);
+    }
 }
