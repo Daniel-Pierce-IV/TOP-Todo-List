@@ -37,4 +37,14 @@ describe('Tasks', () => {
         expect(task.subtasks[0].title).toBe('Subtask #1');
         expect(task.subtasks[1].title).toBe('Subtask #2');
     });
+
+    test('subtasks can\'t be directly externally modified', () => {
+        const oldSubtask = new Task('Subtask #1');
+        const newSubtask = new Task('Subtask #2');
+        const task = new Task('Some Title', { subtasks: [ oldSubtask ] });
+        
+        task.subtasks[0] = newSubtask;
+
+        expect(task.subtasks[0]).toBe(oldSubtask);
+    });
 });
