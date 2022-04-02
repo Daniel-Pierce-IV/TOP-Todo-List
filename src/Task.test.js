@@ -52,4 +52,11 @@ describe('Tasks', () => {
         const task = new Task('Some Title');
         expect(task.isDone).toBe(false);
     });
+
+    test('can be completed', () => {
+        const task = new Task('Some Title');
+        task.complete();
+        
+        expect(task.isDone).tobe(true);
+    });
 });
