@@ -14,4 +14,8 @@ export default class {
     get tasks(){
         return [...this.#tasks];
     }
+
+    addTask(task){
+        this.#tasks.push(task);
+    }
 }
