@@ -22,4 +22,8 @@ export default class {
     get note(){
         return this.#options.note;
     }
+
+    get priority(){
+        return this.#options.priority;
+    }
 }
