@@ -27,4 +27,20 @@ describe('Projects', () => {
 
         expect(project.tasks[0]).toBe(oldTask);
     });
+
+    test('can add tasks', () => {
+        const project = new Project('Project Title');
+
+        expect(project.tasks.length).toEqual(0);
+
+        project.addTask(new Task('Project Task #1'));
+
+        expect(project.tasks.length).toEqual(1);
+        expect(project.tasks[0].title).toEqual('Project Task #1');
+
+        project.addTask(new Task('Project Task #2'));
+
+        expect(project.tasks.length).toEqual(2);
+        expect(project.tasks[1].title).toEqual('Project Task #2');
+    });
 });
