@@ -17,4 +17,14 @@ describe('Projects', () => {
         expect(project.tasks[0].title).toBe('Task #1');
         expect(project.tasks[1].title).toBe('Task #2');
     });
+
+    test('task array can\'t be directly externally modified', () => {
+        const oldTask = new Task('Task #1');
+        const newTask = new Task('Task #2');
+        const project = new Project('Project Title', [ oldTask ]);
+        
+        project.tasks[0] = newTask;
+
+        expect(project.tasks[0]).toBe(oldTask);
+    });
 });
