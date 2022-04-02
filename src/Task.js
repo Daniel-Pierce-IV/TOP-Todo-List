@@ -1,18 +1,28 @@
 export default class {
     #title;
-    #options;
+    #description;
+    #deadline;
+    #note;
+    #priority;
+    #subtasks;
+    #isDone;
     
-    constructor(title, options = {}){
+    constructor(title, {
+            description,
+            deadline,
+            note,
+            priority,
+            subtasks = [],
+            isDone = false
+        } = {}){
+
         this.#title = title;
-        this.#options = options;
-
-        if(this.#options.isDone === undefined){
-            this.#options.isDone = false;
-        }
-
-        if(this.#options.subtasks === undefined){
-            this.#options.subtasks = [];
-        }
+        this.#description = description;
+        this.#deadline = deadline;
+        this.#note = note;
+        this.#priority = priority;
+        this.#subtasks = subtasks;
+        this.#isDone = isDone;
     }
 
     get title(){
@@ -20,34 +30,34 @@ export default class {
     }
 
     get description(){
-        return this.#options.description;
+        return this.#description;
     }
 
     get deadline(){
-        return this.#options.deadline;
+        return this.#deadline;
     }
 
     get note(){
-        return this.#options.note;
+        return this.#note;
     }
 
     get priority(){
-        return this.#options.priority;
+        return this.#priority;
     }
 
     get subtasks(){
-        return [...this.#options.subtasks];
+        return [...this.#subtasks];
     }
 
     get isDone(){
-        return this.#options.isDone;
+        return this.#isDone;
     }
 
     complete(){
-        this.#options.isDone = true;
+        this.#isDone = true;
     }
 
     addSubtask(task){
-        return this.#options.subtasks.push(task);
+        return this.#subtasks.push(task);
     }
 }
