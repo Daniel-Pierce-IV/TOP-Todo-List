@@ -38,6 +38,22 @@ describe('Tasks', () => {
         expect(task.subtasks[1].title).toBe('Subtask #2');
     });
 
+    test('can add subtasks', () => {
+        const task = new Task('Task Title');
+    
+        expect(task.subtasks.length).toEqual(0);
+    
+        task.addSubtask(new Task('Subtask #1'));
+    
+        expect(task.subtasks.length).toEqual(1);
+        expect(task.subtasks[0].title).toEqual('Subtask #1');
+    
+        task.addSubtask(new Task('Subtask #2'));
+    
+        expect(task.subtasks.length).toEqual(2);
+        expect(task.subtasks[1].title).toEqual('Subtask #2');
+    });
+
     test('subtask array can\'t be directly externally modified', () => {
         const oldSubtask = new Task('Subtask #1');
         const newSubtask = new Task('Subtask #2');
