@@ -9,6 +9,10 @@ export default class {
         if(this.#options.isDone === undefined){
             this.#options.isDone = false;
         }
+
+        if(this.#options.subtasks === undefined){
+            this.#options.subtasks = [];
+        }
     }
 
     get title(){
