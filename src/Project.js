@@ -1,11 +1,17 @@
 export default class {
     #title;
+    #tasks;
 
-    constructor(title){
+    constructor(title, tasks = []){
          this.#title = title;
+         this.#tasks = tasks;
     }
 
     get title(){
         return this.#title;
+    }
+
+    get tasks(){
+        return this.#tasks;
     }
 }
