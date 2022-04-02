@@ -26,4 +26,8 @@ export default class {
     get priority(){
         return this.#options.priority;
     }
+
+    get subtasks(){
+        return this.#options.subtasks;
+    }
 }
