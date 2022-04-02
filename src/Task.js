@@ -28,6 +28,6 @@ export default class {
     }
 
     get subtasks(){
-        return this.#options.subtasks;
+        return [...this.#options.subtasks];
     }
 }
