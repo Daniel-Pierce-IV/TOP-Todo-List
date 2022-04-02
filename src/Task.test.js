@@ -56,7 +56,7 @@ describe('Tasks', () => {
     test('can be completed', () => {
         const task = new Task('Some Title');
         task.complete();
-        
-        expect(task.isDone).tobe(true);
+
+        expect(task.isDone).toBe(true);
     });
 });
