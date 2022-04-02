@@ -1,4 +1,5 @@
 import Project from './Project';
+import Task from './Task';
 
 describe('Projects', () => {
     test('have a title', () => {
