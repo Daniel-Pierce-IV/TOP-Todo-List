@@ -47,4 +47,9 @@ describe('Tasks', () => {
 
         expect(task.subtasks[0]).toBe(oldSubtask);
     });
+
+    test('have a done status that defaults to false', () => {
+        const task = new Task('Some Title');
+        expect(task.isDone).toBe(false);
+    });
 });
