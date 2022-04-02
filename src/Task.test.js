@@ -26,4 +26,15 @@ describe('Tasks', () => {
         const task = new Task('Some Title', { priority: Priority.HIGH });
         expect(task.priority).toBe(Priority.HIGH);
     });
+
+    test('can have subtasks', () => {
+        const task = new Task('Some Title', { subtasks: [
+            new Task('Subtask #1'),
+            new Task('Subtask #2')
+        ] });
+
+        expect(task.subtasks.length).toBe(2);
+        expect(task.subtasks[0].title).toBe('Subtask #1');
+        expect(task.subtasks[1].title).toBe('Subtask #2');
+    });
 });
