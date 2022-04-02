@@ -25,5 +25,5 @@ describe('Tasks', () => {
     test('can have a priority', () => {
         const task = new Task('Some Title', { priority: Priority.HIGH });
         expect(task.priority).toBe(Priority.HIGH);
-    })
+    });
 });
