@@ -48,6 +48,11 @@ describe('Tasks', () => {
         expect(task.subtasks[0]).toBe(oldSubtask);
     });
 
+    test('subtasks defaults to empty array', () => {
+        const task = new Task('Task Title');
+        expect(Array.isArray(task.subtasks)).toBe(true);
+    });
+
     test('have a done status that defaults to false', () => {
         const task = new Task('Some Title');
         expect(task.isDone).toBe(false);
