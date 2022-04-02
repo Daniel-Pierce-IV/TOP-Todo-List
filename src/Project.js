@@ -12,6 +12,6 @@ export default class {
     }
 
     get tasks(){
-        return this.#tasks;
+        return [...this.#tasks];
     }
 }
