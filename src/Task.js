@@ -38,4 +38,8 @@ export default class {
     get isDone(){
         return this.#options.isDone;
     }
+
+    complete(){
+        this.#options.isDone = true;
+    }
 }
