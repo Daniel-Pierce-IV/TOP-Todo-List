@@ -1,63 +1,39 @@
 export default class {
-    #title;
-    #description;
-    #deadline;
-    #note;
-    #priority;
-    #subtasks;
-    #isDone;
-    
-    constructor(title, {
-            description,
-            deadline,
-            note,
-            priority,
-            subtasks = [],
-            isDone = false
-        } = {}){
+  #title;
+  #description;
+  #deadline;
+  #priority;
+  #isDone;
 
-        this.#title = title;
-        this.#description = description;
-        this.#deadline = deadline;
-        this.#note = note;
-        this.#priority = priority;
-        this.#subtasks = subtasks;
-        this.#isDone = isDone;
-    }
+  constructor(title, { description, deadline, priority, isDone = false } = {}) {
+    this.#title = title;
+    this.#description = description;
+    this.#deadline = deadline;
+    this.#priority = priority;
+    this.#isDone = isDone;
+  }
 
-    get title(){
-        return this.#title;
-    }
+  get title() {
+    return this.#title;
+  }
 
-    get description(){
-        return this.#description;
-    }
+  get description() {
+    return this.#description;
+  }
 
-    get deadline(){
-        return this.#deadline;
-    }
+  get deadline() {
+    return this.#deadline;
+  }
 
-    get note(){
-        return this.#note;
-    }
+  get priority() {
+    return this.#priority;
+  }
 
-    get priority(){
-        return this.#priority;
-    }
+  get isDone() {
+    return this.#isDone;
+  }
 
-    get subtasks(){
-        return [...this.#subtasks];
-    }
-
-    get isDone(){
-        return this.#isDone;
-    }
-
-    complete(){
-        this.#isDone = true;
-    }
-
-    addSubtask(task){
-        return this.#subtasks.push(task);
-    }
+  complete() {
+    this.#isDone = true;
+  }
 }
