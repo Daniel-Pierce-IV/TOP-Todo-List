@@ -43,6 +43,44 @@
         </div>
     </main>
 
+    <dialog id="new-project-dialog" class="rounded-2xl p-0">
+        <h1 class="text-white text-2xl text-center bg-green-500">New Project</h1>
+    
+        <form method="dialog" class="flex flex-col p-4 gap-4">
+            <div class="flex flex-col">
+                <label for="title">Title</label>
+                <input class="rounded border-2 border-gray-500" type="text" name="title" id="title">
+            </div>
+    
+            <div class="flex gap-2 mt-4">
+                <button class="rounded bg-green-200 hover:bg-green-300 px-4 py-0.5" type="submit" value="save">Save</button>
+                <button class="rounded px-2 py-0.5 underline hover:bg-gray-100" type="submit" value="cancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    
+    <dialog id="edit-project-dialog" class="rounded-2xl p-0">
+        <h1 class="text-white text-2xl text-center bg-green-500">Edit Project</h1>
+    
+        <form method="dialog" class="flex flex-col p-4 gap-4">
+            <div class="flex flex-col">
+                <label for="title">Title</label>
+                <input class="rounded border-2 border-gray-500" type="text" name="title" id="title">
+            </div>
+    
+            <div class="flex gap-2 mt-4">
+                <button class="rounded bg-green-200 hover:bg-green-300 px-4 py-0.5" type="submit" value="save">Save</button>
+                <button class="rounded px-2 py-0.5 underline hover:bg-gray-100" type="submit" value="cancel">Cancel</button>
+                <button class="rounded p-1 ml-auto text-white bg-red-400 hover:bg-red-500" type="submit" value="delete">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" />
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </dialog>
+
     <dialog id="new-task-dialog" class="rounded-2xl p-0">
         <h1 class="text-white text-2xl text-center bg-green-500">New Task</h1>
     
