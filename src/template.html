@@ -7,7 +7,147 @@
   <link rel="stylesheet" href="./output.css">
   <title>Todo List</title>
 </head>
-<body>
-  
+<body class="flex p-12 pb-0">
+  <nav id="sidebar" class="flex flex-col w-80 pr-8 mb-12 border-r-2 border-gray-400">
+    <header class="border-b-2 border-gray-400">
+      <h1 class="text-center text-4xl pb-2">Projects</h1>
+    </header>
+
+    <ul id="projects" class="flex flex-col gap-2 pt-2">
+      <li id="new-project" class="cursor-pointer p-2 text-center bg-green-300 hover:bg-green-400 active:bg-green-500">Create A New Project</li>
+      <li class="project active cursor-pointer p-2 hover:bg-gray-100 active:bg-gray-300">Default Project</li>
+    </ul>
+  </nav>
+
+  <main id="content" class="flex flex-col pl-8 grow">
+    <header class="border-b-2 border-gray-400 sticky top-0 bg-white">
+      <h2 class="text-4xl pb-2">Default Project</h2>
+    </header>
+
+    <div id="tasks" class="flex flex-col pt-4 gap-2 overflow-y-auto ml-4 pr-4">
+      <div class="task pt-4 first:pt-0 grid grid-cols-[auto,1fr,auto] items-center gap-x-4 gap-y-1.5">
+        <div
+          class="checkbox cursor-pointer w-6 h-6 border-2 bg-neutral-200 border-neutral-500 hover:bg-neutral-300 active:bg-neutral-400">
+        </div>
+        <h3 class="title text-lg">Example Task</h3>
+        <div class="deadline text-lg bg-gray-200 px-2">Jan 1st, 2020</div>
+        <p class="description pb-2 col-start-2 row-start-2 text-sm col-span-2 border-b-2 border-gray-200">A short description, if needed</p>
+      </div>
+
+      <div class="task pt-4 first:pt-0 grid grid-cols-[auto,1fr,auto] items-center gap-x-4 gap-y-1.5">
+        <div class="checkbox cursor-pointer w-6 h-6 border-2 bg-red-200 border-red-600 hover:bg-red-300 active:bg-red-400">
+        </div>
+        <h3 class="title text-lg">Second Example</h3>
+        <div class="deadline text-lg bg-gray-200 px-2">Jan 1st, 2020</div>
+        <p class="description pb-2 col-start-2 row-start-2 text-sm col-span-2 border-b-2 border-gray-200">This one is high priority, which is why the checkbox is red!</p>
+      </div>
+    </div>
+  </main>
+
+  <dialog id="new-project-dialog" class="rounded-2xl p-0">
+    <h1 class="text-white text-2xl text-center bg-green-500">New Project</h1>
+
+    <form method="dialog" class="flex flex-col p-4 gap-4">
+      <div class="flex flex-col">
+        <label for="title">Title</label>
+        <input class="rounded border-2 border-gray-500" type="text" name="title" id="title">
+      </div>
+
+      <div class="flex gap-2 mt-4">
+        <button class="rounded bg-green-200 hover:bg-green-300 px-4 py-0.5" type="submit" value="save">Save</button>
+        <button class="rounded px-2 py-0.5 underline hover:bg-gray-100" type="submit" value="cancel">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="edit-project-dialog" class="rounded-2xl p-0">
+    <h1 class="text-white text-2xl text-center bg-green-500">Edit Project</h1>
+
+    <form method="dialog" class="flex flex-col p-4 gap-4">
+      <div class="flex flex-col">
+        <label for="title">Title</label>
+        <input class="rounded border-2 border-gray-500" type="text" name="title" id="title">
+      </div>
+
+      <div class="flex gap-2 mt-4">
+        <button class="rounded bg-green-200 hover:bg-green-300 px-4 py-0.5" type="submit" value="save">Save</button>
+        <button class="rounded px-2 py-0.5 underline hover:bg-gray-100" type="submit" value="cancel">Cancel</button>
+        <button class="rounded p-1 ml-auto text-white bg-red-400 hover:bg-red-500" type="submit" value="delete">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" />
+          </svg>
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="new-task-dialog" class="rounded-2xl p-0">
+    <h1 class="text-white text-2xl text-center bg-green-500">New Task</h1>
+
+    <form method="dialog" class="flex flex-col p-4 gap-4">
+      <div class="flex flex-col">
+        <label for="title">Title</label>
+        <input class="rounded border-2 border-gray-500" type="text" name="title" id="title">
+      </div>
+
+      <div class="flex flex-col">
+        <label for="deadline">Deadline</label>
+        <input class="rounded border-2 border-gray-500" type="date" name="deadline" id="deadline">
+      </div>
+
+      <div class="flex flex-col">
+        <label for="description">Description</label>
+        <textarea class="rounded border-2 border-gray-500" name="description" id="description"></textarea>
+      </div>
+
+      <div class="flex items-center">
+        <label class="pr-4" for="priority">High priority?</label>
+        <input class="scale-150 border-2 border-gray-500" type="checkbox" name="priority" id="priority">
+      </div>
+
+      <div class="flex gap-2 mt-4">
+        <button class="rounded bg-green-200 hover:bg-green-300 px-4 py-0.5" type="submit" value="save">Save</button>
+        <button class="rounded px-2 py-0.5 underline hover:bg-gray-100" type="submit" value="cancel">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="edit-task-dialog" class="rounded-2xl p-0">
+    <h1 class="text-white text-2xl text-center bg-green-500">Edit Task</h1>
+
+    <form method="dialog" class="flex flex-col p-4 gap-4">
+      <div class="flex flex-col">
+        <label for="title">Title</label>
+        <input class="rounded border-2 border-gray-500" type="text" name="title" id="title">
+      </div>
+
+      <div class="flex flex-col">
+        <label for="deadline">Deadline</label>
+        <input class="rounded border-2 border-gray-500" type="date" name="deadline" id="deadline">
+      </div>
+
+      <div class="flex flex-col">
+        <label for="description">Description</label>
+        <textarea class="rounded border-2 border-gray-500" name="description" id="description"></textarea>
+      </div>
+
+      <div class="flex items-center">
+        <label class="pr-4" for="priority">High priority?</label>
+        <input class="scale-150 border-2 border-gray-500" type="checkbox" name="priority" id="priority">
+      </div>
+
+      <div class="flex gap-2 mt-4">
+        <button class="rounded bg-green-200 hover:bg-green-300 px-4 py-0.5" type="submit" value="save">Save</button>
+        <button class="rounded px-2 py-0.5 underline hover:bg-gray-100" type="submit" value="cancel">Cancel</button>
+        <button class="rounded p-1 ml-auto text-white bg-red-400 hover:bg-red-500" type="submit" value="delete">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" />
+          </svg>
+        </button>
+      </div>
+    </form>
+  </dialog>
 </body>
 </html>

@@ -11,3 +11,11 @@ body {
     background-color: black;
     opacity: 10%;
 }
+
+#projects .active, #projects .active:hover {
+    background-color: rgb(229 231 235);
+}
+
+#projects .active:active {
+    background-color: rgb(209 213 219);
+}
