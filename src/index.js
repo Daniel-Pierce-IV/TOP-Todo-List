@@ -20,6 +20,9 @@ baseProjectElement.classList.add(...projectClasses);
 const newProjectButton = document.querySelector('#new-project');
 const newProjectDialog = document.querySelector('#new-project-dialog');
 
+const newTaskButton = document.querySelector('#new-task');
+const newTaskDialog = document.querySelector('#new-task-dialog');
+
 // TODO import existing projects. If empty, create default project
 
 const projects = [];
@@ -58,6 +61,12 @@ newProjectButton.addEventListener('click', () => {
   newProjectDialog.showModal();
 });
 
+newTaskButton.addEventListener('click', () => {
+  // Always present user with an empty form
+  newTaskDialog.querySelector('form').reset();
+  newTaskDialog.showModal();
+});
+
 newProjectDialog.addEventListener('close', () => {
   if (newProjectDialog.returnValue === 'save') {
     const data = Object.fromEntries(
@@ -70,12 +79,36 @@ newProjectDialog.addEventListener('close', () => {
   }
 });
 
+newTaskDialog.addEventListener('close', () => {
+  if (newTaskDialog.returnValue === 'save') {
+    const data = Object.fromEntries(
+      new FormData(newTaskDialog.querySelector('form'))
+    );
+
+    if (data.title) {
+      createTask(data);
+    }
+  }
+});
+
 function createProject(data) {
   const project = new Project(data.title);
   projects.push(project);
   project.element = createProjectElement(project);
   projectsElement.prepend(project.element);
   changeProject(project);
+}
+
+function createTask(data) {
+  const task = new Task(data.title, {
+    description: data.description,
+    deadline: data.deadline,
+    priority: data.priority ? Priority.HIGH : Priority.LOW,
+    isDone: false,
+  });
+
+  currentProject.addTask(task);
+  task.element = createTaskElement(task);
 }
 
 function createProjectElement(project) {
@@ -88,14 +121,25 @@ function createProjectElement(project) {
 }
 
 function createTaskElement(task) {
+  const highPriorityCheckboxClasses =
+    'bg-red-200 border-red-600 hover:bg-red-300 active:bg-red-400';
+  const lowPriorityCheckboxClasses =
+    'bg-neutral-200 border-neutral-500 hover:bg-neutral-300 active:bg-neutral-400';
+
   const taskElement = `
     <div class="task pt-4 first:pt-0 grid grid-cols-[auto,1fr,auto] items-center gap-x-4 gap-y-1.5">
       <div
-        class="checkbox cursor-pointer w-6 h-6 border-2 bg-neutral-200 border-neutral-500 hover:bg-neutral-300 active:bg-neutral-400">
+        class="checkbox cursor-pointer w-6 h-6 border-2 ${
+          task.priority === Priority.HIGH
+            ? highPriorityCheckboxClasses
+            : lowPriorityCheckboxClasses
+        }">
       </div>
       <h3 class="title text-lg">${task.title}</h3>
       <div class="deadline text-lg bg-gray-200 px-2">${task.deadline}</div>
-      <p class="description pb-2 col-start-2 row-start-2 text-sm col-span-2 border-b-2 border-gray-200">${task.description}</p>
+      <p class="description pb-2 col-start-2 row-start-2 text-sm col-span-2 border-b-2 border-gray-200">${
+        task.description
+      }</p>
     </div>`;
 
   projectTasksElement.insertAdjacentHTML('beforeend', taskElement);
