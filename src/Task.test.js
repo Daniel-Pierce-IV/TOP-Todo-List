@@ -50,6 +50,18 @@ describe('Tasks', () => {
     expect(task.priority).toBe(Priority.HIGH);
   });
 
+  test('cant set priority to non-enum value', () => {
+    expect(
+      () => new Task('Some Title', { priority: 'some text' })
+    ).toThrowError('Task priority must be a value from the Priority enum');
+
+    const task = new Task('Some Title', { priority: Priority.LOW });
+
+    expect(() => (task.priority = 123)).toThrowError(
+      'Task priority must be a value from the Priority enum'
+    );
+  });
+
   test('have a done status that defaults to false', () => {
     const task = new Task('Some Title');
     expect(task.isDone).toBe(false);
