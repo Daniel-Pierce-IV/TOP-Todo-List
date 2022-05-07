@@ -9,7 +9,7 @@ export default class Task {
     this.title = title;
     this.description = description;
     this.deadline = deadline;
-    this.#priority = priority;
+    this.priority = priority;
     this.#isDone = isDone;
   }
 
@@ -40,6 +40,10 @@ export default class Task {
 
   get priority() {
     return this.#priority;
+  }
+
+  set priority(value) {
+    this.#priority = value;
   }
 
   get isDone() {
