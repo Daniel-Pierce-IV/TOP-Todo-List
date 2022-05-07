@@ -44,7 +44,7 @@ export default class Task {
     return this.#priority;
   }
 
-  set priority(value) {
+  set priority(value = Priority.LOW) {
     if (Object.values(Priority).includes(value)) {
       this.#priority = value;
     } else {
