@@ -14,6 +14,8 @@ const editProjectDialog = document.querySelector('#edit-project-dialog');
 const newTaskButton = document.querySelector('#new-task');
 const newTaskDialog = document.querySelector('#new-task-dialog');
 
+const editTaskDialog = document.querySelector('#edit-task-dialog');
+
 // TODO import existing projects. If empty, create default project
 
 const projects = [];
@@ -145,7 +147,13 @@ function createTaskElement(task) {
     </div>`;
 
   projectTasksElement.insertAdjacentHTML('beforeend', element);
-  return projectTasksElement.lastElementChild;
+  const taskElement = projectTasksElement.lastElementChild;
+
+  taskElement.addEventListener('click', () => {
+    editTaskDialog.showModal();
+  });
+
+  return taskElement;
 }
 
 function changeProject(project) {
