@@ -44,7 +44,7 @@ describe('Tasks', () => {
     expect(task.priority).toBe(Priority.LOW);
   });
 
-  test('can have a priority', () => {
+  test('can initialize priority', () => {
     const task = new Task('Some Title', { priority: Priority.HIGH });
     expect(task.priority).toBe(Priority.HIGH);
   });
