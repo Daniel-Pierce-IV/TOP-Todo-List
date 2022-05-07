@@ -17,28 +17,8 @@ const newTaskDialog = document.querySelector('#new-task-dialog');
 const projects = [];
 let currentProject;
 
-if (!projects.length) {
-  createProject({ title: 'Default Project' });
-
-  let task1 = new Task('Example Task', {
-    description: 'A short description, if needed',
-    deadline: Date.now(),
-    priority: Priority.LOW,
-    isDone: false,
-  });
-
-  let task2 = new Task('Second Example', {
-    description: 'This one is high priority, which is why the checkbox is red!',
-    deadline: Date.now(),
-    priority: Priority.HIGH,
-    isDone: false,
-  });
-
-  task1.element = createTaskElement(task1);
-  task2.element = createTaskElement(task2);
-
-  currentProject.addTask(task1);
-  currentProject.addTask(task2);
+if (projects.length === 0) {
+  createDefaultProject();
 }
 
 // Latest-created project is the default on page load
@@ -79,6 +59,30 @@ newTaskDialog.addEventListener('close', () => {
     }
   }
 });
+
+function createDefaultProject() {
+  createProject({ title: 'Default Project' });
+
+  let task1 = new Task('Example Task', {
+    description: 'A short description, if needed',
+    deadline: Date.now(),
+    priority: Priority.LOW,
+    isDone: false,
+  });
+
+  let task2 = new Task('Second Example', {
+    description: 'This one is high priority, which is why the checkbox is red!',
+    deadline: Date.now(),
+    priority: Priority.HIGH,
+    isDone: false,
+  });
+
+  task1.element = createTaskElement(task1);
+  task2.element = createTaskElement(task2);
+
+  currentProject.addTask(task1);
+  currentProject.addTask(task2);
+}
 
 function createProject(data) {
   const project = new Project(data.title);
