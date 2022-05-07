@@ -6,7 +6,7 @@ export default class Task {
   #isDone;
 
   constructor(title, { description, deadline, priority, isDone = false } = {}) {
-    this.#title = title;
+    this.title = title;
     this.#description = description;
     this.#deadline = deadline;
     this.#priority = priority;
@@ -15,6 +15,11 @@ export default class Task {
 
   get title() {
     return this.#title;
+  }
+
+  set title(value) {
+    if (!value) throw new Error('Task title must have a value');
+    this.#title = value;
   }
 
   get description() {
