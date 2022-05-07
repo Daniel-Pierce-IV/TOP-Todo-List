@@ -3,12 +3,17 @@ export default class Project {
   #tasks;
 
   constructor(title, tasks = []) {
-    this.#title = title;
+    this.title = title;
     this.#tasks = tasks;
   }
 
   get title() {
     return this.#title;
+  }
+
+  set title(value) {
+    if (!value) throw new Error('Project title must have a value');
+    this.#title = value;
   }
 
   get tasks() {
