@@ -1,7 +1,10 @@
 import Project from './Project';
+import Task from './Task';
+import Priority from './Priority';
 
 const projectsElement = document.querySelector('#projects');
 const projectTitleElement = document.querySelector('#content header h2');
+const projectTasksElement = document.querySelector('#tasks');
 
 const projectClasses = [
   'project',
@@ -24,6 +27,26 @@ let currentProject;
 
 if (!projects.length) {
   createProject({ title: 'Default Project' });
+
+  let task1 = new Task('Example Task', {
+    description: 'A short description, if needed',
+    deadline: Date.now(),
+    priority: Priority.LOW,
+    isDone: false,
+  });
+
+  let task2 = new Task('Second Example', {
+    description: 'This one is high priority, which is why the checkbox is red!',
+    deadline: Date.now(),
+    priority: Priority.HIGH,
+    isDone: false,
+  });
+
+  task1.element = createTaskElement(task1);
+  task2.element = createTaskElement(task2);
+
+  currentProject.addTask(task1);
+  currentProject.addTask(task2);
 }
 
 // Latest-created project is the default on page load
@@ -64,6 +87,21 @@ function createProjectElement(project) {
   return element;
 }
 
+function createTaskElement(task) {
+  const taskElement = `
+    <div class="task pt-4 first:pt-0 grid grid-cols-[auto,1fr,auto] items-center gap-x-4 gap-y-1.5">
+      <div
+        class="checkbox cursor-pointer w-6 h-6 border-2 bg-neutral-200 border-neutral-500 hover:bg-neutral-300 active:bg-neutral-400">
+      </div>
+      <h3 class="title text-lg">${task.title}</h3>
+      <div class="deadline text-lg bg-gray-200 px-2">${task.deadline}</div>
+      <p class="description pb-2 col-start-2 row-start-2 text-sm col-span-2 border-b-2 border-gray-200">${task.description}</p>
+    </div>`;
+
+  projectTasksElement.insertAdjacentHTML('beforeend', taskElement);
+  return projectTasksElement.lastElementChild;
+}
+
 function changeProject(project) {
   updateCurrentProject(project);
   updateProjectSection();
@@ -80,4 +118,8 @@ function updateCurrentProject(project) {
 
 function updateProjectSection() {
   projectTitleElement.textContent = currentProject.title;
+  projectTasksElement.innerHTML = null;
+  currentProject.tasks.forEach((task) =>
+    projectTasksElement.append(task.element)
+  );
 }
