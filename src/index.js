@@ -128,7 +128,7 @@ function createTaskElement(task) {
   const lowPriorityCheckboxClasses =
     'bg-neutral-200 border-neutral-500 hover:bg-neutral-300 active:bg-neutral-400';
 
-  const taskElement = `
+  const element = `
     <div class="task pt-4 first:pt-0 grid grid-cols-[auto,1fr,auto] items-center gap-x-4 gap-y-1.5">
       <div
         class="checkbox cursor-pointer w-6 h-6 border-2 ${
@@ -144,7 +144,7 @@ function createTaskElement(task) {
       }</p>
     </div>`;
 
-  projectTasksElement.insertAdjacentHTML('beforeend', taskElement);
+  projectTasksElement.insertAdjacentHTML('beforeend', element);
   return projectTasksElement.lastElementChild;
 }
 
