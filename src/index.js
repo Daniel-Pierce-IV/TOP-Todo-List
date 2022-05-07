@@ -6,17 +6,6 @@ const projectsElement = document.querySelector('#projects');
 const projectTitleElement = document.querySelector('#content header h2');
 const projectTasksElement = document.querySelector('#tasks');
 
-const projectClasses = [
-  'project',
-  'cursor-pointer',
-  'p-2',
-  'hover:bg-gray-100',
-  'active:bg-gray-300',
-];
-
-const baseProjectElement = document.createElement('li');
-baseProjectElement.classList.add(...projectClasses);
-
 const newProjectButton = document.querySelector('#new-project');
 const newProjectDialog = document.querySelector('#new-project-dialog');
 
@@ -95,7 +84,6 @@ function createProject(data) {
   const project = new Project(data.title);
   projects.push(project);
   project.element = createProjectElement(project);
-  projectsElement.prepend(project.element);
   changeProject(project);
 }
 
@@ -112,12 +100,13 @@ function createTask(data) {
 }
 
 function createProjectElement(project) {
-  const element = baseProjectElement.cloneNode();
-  element.textContent = project.title;
-  element.classList.add('active');
-  element.addEventListener('click', changeProject.bind(null, project));
+  const element = `<li class="active project cursor-pointer p-2 hover:bg-gray-100 active:bg-gray-300">${project.title}</li>`;
+  projectsElement.insertAdjacentHTML('afterbegin', element);
 
-  return element;
+  const projectElement = projectsElement.firstElementChild;
+  projectElement.addEventListener('click', changeProject.bind(null, project));
+
+  return projectElement;
 }
 
 function createTaskElement(task) {
