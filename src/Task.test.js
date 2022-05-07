@@ -33,6 +33,12 @@ describe('Tasks', () => {
     expect(task.deadline).toBe('2022-04-01');
   });
 
+  test('can update the deadline', () => {
+    const task = new Task('Some Title', { deadline: '2022-05-07' });
+    task.deadline = '2022-05-08';
+    expect(task.deadline).toBe('2022-05-08');
+  });
+
   test('can have a priority', () => {
     const task = new Task('Some Title', { priority: Priority.HIGH });
     expect(task.priority).toBe(Priority.HIGH);
