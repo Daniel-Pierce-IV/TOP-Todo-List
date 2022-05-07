@@ -1,3 +1,5 @@
+import Priority from './Priority';
+
 export default class Task {
   #title;
   #description;
@@ -43,7 +45,11 @@ export default class Task {
   }
 
   set priority(value) {
-    this.#priority = value;
+    if (Object.values(Priority).includes(value)) {
+      this.#priority = value;
+    } else {
+      throw new Error('Task priority must be a value from the Priority enum');
+    }
   }
 
   get isDone() {
