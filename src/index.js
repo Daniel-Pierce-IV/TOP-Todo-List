@@ -163,6 +163,7 @@ function updateCurrentProject(project) {
 }
 
 function updateProjectSection() {
+  showProjectSection();
   projectTitleElement.textContent = currentProject.title;
   projectTasksElement.innerHTML = null;
   currentProject.tasks.forEach((task) =>
@@ -203,5 +204,15 @@ function deleteCurrentProject() {
       // Activate the "bottom" project in the list
       changeProject(projects[projects.length - 1]);
     }
+  } else {
+    hideProjectSection();
   }
+}
+
+function hideProjectSection() {
+  document.querySelector('#content').style.opacity = 0;
+}
+
+function showProjectSection() {
+  document.querySelector('#content').style.opacity = null;
 }
