@@ -11,6 +11,12 @@ describe('Tasks', () => {
     expect(() => new Task('')).toThrowError('Task title must have a value');
   });
 
+  test('can update the title', () => {
+    const task = new Task('Some Title');
+    task.title = 'New Title';
+    expect(task.title).toBe('New Title');
+  });
+
   test('can have a description', () => {
     const task = new Task('Some Title', { description: 'A neat description' });
     expect(task.description).toBe('A neat description');
