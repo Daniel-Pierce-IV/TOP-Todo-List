@@ -192,12 +192,16 @@ function deleteCurrentProject() {
 
   if (projects.length > 0) {
     // Simulate project elements "moving up" when one above them is deleted
-    if (projects[projectIndex] && projectIndex - 1 >= 0) {
+    if (projectIndex - 1 >= 0) {
       // projectIndex - 1 necessary because we're
       // displaying projects in reverse order
       changeProject(projects[projectIndex - 1]);
-    } else {
+    } else if (projects[projectIndex]) {
+      // Activate the project above the deleted project
       changeProject(projects[projectIndex]);
+    } else {
+      // Activate the "bottom" project in the list
+      changeProject(projects[projects.length - 1]);
     }
   }
 }
