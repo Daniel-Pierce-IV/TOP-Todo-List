@@ -8,7 +8,7 @@ export default class Task {
   constructor(title, { description, deadline, priority, isDone = false } = {}) {
     this.title = title;
     this.description = description;
-    this.#deadline = deadline;
+    this.deadline = deadline;
     this.#priority = priority;
     this.#isDone = isDone;
   }
@@ -32,6 +32,10 @@ export default class Task {
 
   get deadline() {
     return this.#deadline;
+  }
+
+  set deadline(value) {
+    this.#deadline = value;
   }
 
   get priority() {
