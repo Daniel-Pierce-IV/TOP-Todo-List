@@ -44,6 +44,12 @@ describe('Tasks', () => {
     expect(task.priority).toBe(Priority.HIGH);
   });
 
+  test('can update the priority', () => {
+    const task = new Task('Some Title', { priority: Priority.LOW });
+    task.priority = Priority.HIGH;
+    expect(task.priority).toBe(Priority.HIGH);
+  });
+
   test('have a done status that defaults to false', () => {
     const task = new Task('Some Title');
     expect(task.isDone).toBe(false);
