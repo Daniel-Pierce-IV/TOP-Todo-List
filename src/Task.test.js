@@ -50,7 +50,7 @@ describe('Tasks', () => {
   });
 
   test('can update the priority', () => {
-    const task = new Task('Some Title', { priority: Priority.LOW });
+    const task = new Task('Some Title');
     task.priority = Priority.HIGH;
     expect(task.priority).toBe(Priority.HIGH);
   });
