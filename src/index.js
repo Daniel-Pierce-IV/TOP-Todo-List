@@ -22,7 +22,7 @@ if (projects.length === 0) {
 }
 
 // Latest-created project is the default on page load
-currentProject = projects[projects.length - 1];
+updateCurrentProject(projects[projects.length - 1]);
 
 newProjectButton.addEventListener('click', () => {
   // Always present user with an empty form
