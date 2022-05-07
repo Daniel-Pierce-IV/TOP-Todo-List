@@ -1,21 +1,21 @@
-export default class {
-    #title;
-    #tasks;
+export default class Project {
+  #title;
+  #tasks;
 
-    constructor(title, tasks = []){
-         this.#title = title;
-         this.#tasks = tasks;
-    }
+  constructor(title, tasks = []) {
+    this.#title = title;
+    this.#tasks = tasks;
+  }
 
-    get title(){
-        return this.#title;
-    }
+  get title() {
+    return this.#title;
+  }
 
-    get tasks(){
-        return [...this.#tasks];
-    }
+  get tasks() {
+    return [...this.#tasks];
+  }
 
-    addTask(task){
-        this.#tasks.push(task);
-    }
+  addTask(task) {
+    this.#tasks.push(task);
+  }
 }
