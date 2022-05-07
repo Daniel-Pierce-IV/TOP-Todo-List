@@ -9,6 +9,8 @@ const projectTasksElement = document.querySelector('#tasks');
 const newProjectButton = document.querySelector('#new-project');
 const newProjectDialog = document.querySelector('#new-project-dialog');
 
+const editProjectDialog = document.querySelector('#edit-project-dialog');
+
 const newTaskButton = document.querySelector('#new-task');
 const newTaskDialog = document.querySelector('#new-task-dialog');
 
@@ -36,6 +38,11 @@ newTaskButton.addEventListener('click', () => {
   newTaskDialog.showModal();
 });
 
+projectTitleElement.addEventListener('click', () => {
+  editProjectDialog.querySelector('form').reset();
+  editProjectDialog.showModal();
+});
+
 newProjectDialog.addEventListener('close', () => {
   if (newProjectDialog.returnValue === 'save') {
     const data = Object.fromEntries(
@@ -59,6 +66,8 @@ newTaskDialog.addEventListener('close', () => {
     }
   }
 });
+
+editProjectDialog.addEventListener('close', editProjectHandler);
 
 function createDefaultProject() {
   createProject({ title: 'Default Project' });
@@ -159,4 +168,36 @@ function updateProjectSection() {
   currentProject.tasks.forEach((task) =>
     projectTasksElement.append(task.element)
   );
+}
+
+function editProjectHandler() {
+  if (editProjectDialog.returnValue === 'save') {
+    const data = Object.fromEntries(
+      new FormData(editProjectDialog.querySelector('form'))
+    );
+
+    currentProject.title = data.title;
+    projectsElement.querySelector('.active').textContent = data.title;
+    updateProjectSection();
+  } else if (editProjectDialog.returnValue === 'delete') {
+    deleteCurrentProject();
+  }
+}
+
+function deleteCurrentProject() {
+  const projectIndex = projects.indexOf(currentProject);
+  projects.splice(projectIndex, 1);
+  currentProject = null;
+  projectsElement.querySelector('.active').remove();
+
+  if (projects.length > 0) {
+    // Simulate project elements "moving up" when one above them is deleted
+    if (projects[projectIndex] && projectIndex - 1 >= 0) {
+      // projectIndex - 1 necessary because we're
+      // displaying projects in reverse order
+      changeProject(projects[projectIndex - 1]);
+    } else {
+      changeProject(projects[projectIndex]);
+    }
+  }
 }
