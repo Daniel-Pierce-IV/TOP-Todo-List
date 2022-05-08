@@ -209,6 +209,7 @@ function editProjectHandler() {
     projectsElement.querySelector('.active').textContent = data.title;
     updateProjectSection();
   } else if (editProjectDialog.returnValue === 'delete') {
+    editProjectDialog.returnValue = null;
     deleteCurrentProject();
   }
 }
