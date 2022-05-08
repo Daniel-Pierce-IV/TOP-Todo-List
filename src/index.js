@@ -91,14 +91,14 @@ function createDefaultProject() {
 
   let task1 = new Task('Example Task', {
     description: 'A short description, if needed',
-    deadline: Date.now(),
+    deadline: '2022-05-07',
     priority: Priority.LOW,
     isDone: false,
   });
 
   let task2 = new Task('Second Example', {
     description: 'This one is high priority, which is why the checkbox is red!',
-    deadline: Date.now(),
+    deadline: '2022-05-08',
     priority: Priority.HIGH,
     isDone: false,
   });
@@ -166,6 +166,7 @@ function createTaskElement(task) {
 
   taskElement.addEventListener('click', () => {
     editTaskDialog.task = task;
+    populateEditTaskDialog();
     editTaskDialog.showModal();
   });
 
@@ -207,6 +208,19 @@ function editProjectHandler() {
   } else if (editProjectDialog.returnValue === 'delete') {
     deleteCurrentProject();
   }
+}
+
+function populateEditTaskDialog() {
+  editTaskDialog.querySelector('#title').value = editTaskDialog.task.title;
+
+  editTaskDialog.querySelector('#deadline').value =
+    editTaskDialog.task.deadline;
+
+  editTaskDialog.querySelector('#description').value =
+    editTaskDialog.task.description;
+
+  editTaskDialog.querySelector('#priority').checked =
+    editTaskDialog.task.priority === Priority.HIGH;
 }
 
 function deleteCurrentProject() {
