@@ -82,8 +82,8 @@ editTaskDialog.addEventListener('close', () => {
     editTask(editTaskDialog.task, data);
     updateProjectSection();
   } else if (editTaskDialog.returnValue === 'delete') {
-    // TODO delete the task from the project
-    // TODO refresh UI
+    currentProject.removeTask(editTaskDialog.task);
+    updateProjectSection();
   }
 });
 
