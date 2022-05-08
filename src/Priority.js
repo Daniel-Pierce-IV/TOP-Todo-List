@@ -1,4 +1,4 @@
 export default {
-    LOW: Symbol(),
-    HIGH: Symbol()
-}
+  LOW: Symbol.for('low'),
+  HIGH: Symbol.for('high'),
+};
