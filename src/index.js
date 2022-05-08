@@ -66,6 +66,7 @@ newTaskDialog.addEventListener('close', () => {
 
     if (data.title) {
       createTask(data);
+      updateProjectSection();
     }
   }
 });
