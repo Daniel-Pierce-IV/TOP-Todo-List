@@ -1,3 +1,4 @@
+import { format, parseISO } from 'date-fns';
 import Project from './Project';
 import Task from './Task';
 import Priority from './Priority';
@@ -155,7 +156,10 @@ function createTaskElement(task) {
         }">
       </div>
       <h3 class="title text-lg">${task.title}</h3>
-      <div class="deadline text-lg bg-gray-200 px-2">${task.deadline}</div>
+      <div class="deadline text-lg bg-gray-200 px-2">${format(
+        parseISO(task.deadline),
+        'MMM d, yyyy'
+      )}</div>
       <p class="description pb-2 col-start-2 row-start-2 text-sm col-span-2 border-b-2 border-gray-200">${
         task.description
       }</p>
