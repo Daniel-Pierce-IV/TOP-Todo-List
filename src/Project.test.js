@@ -55,4 +55,19 @@ describe('Projects', () => {
     expect(project.tasks.length).toEqual(2);
     expect(project.tasks[1].title).toEqual('Project Task #2');
   });
+
+  test('can remove tasks', () => {
+    const taskToRemove = new Task('Remove Me!');
+    let taskArray = [
+      new Task('random #1'),
+      taskToRemove,
+      new Task('random #2'),
+    ];
+
+    const project = new Project('Project Title', [...taskArray]);
+    project.removeTask(taskToRemove);
+
+    expect(project.tasks[0].title).toBe(taskArray[0].title);
+    expect(project.tasks[1].title).toBe(taskArray[2].title);
+  });
 });
