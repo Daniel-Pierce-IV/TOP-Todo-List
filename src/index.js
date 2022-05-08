@@ -79,8 +79,7 @@ editTaskDialog.addEventListener('close', () => {
     );
 
     editTask(editTaskDialog.task, data);
-    // TODO update the task's element
-    // TODO refresh UI
+    updateProjectSection();
   } else if (editTaskDialog.returnValue === 'delete') {
     // TODO delete the task from the project
     // TODO refresh UI
@@ -258,6 +257,9 @@ function editTask(task, data) {
 
   // Checkboxes show up in forms if checked, and not if theyre false
   if (data.priority) task.priority = Priority.HIGH;
+
+  // Update the task's HTML info
+  task.element = createTaskElement(task);
 }
 
 function hideProjectSection() {
