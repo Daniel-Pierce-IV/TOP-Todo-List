@@ -256,7 +256,7 @@ function editTask(task, data) {
   task.description = data.description;
 
   // Checkboxes show up in forms if checked, and not if theyre false
-  if (data.priority) task.priority = Priority.HIGH;
+  task.priority = data.priority ? Priority.HIGH : Priority.LOW;
 
   // Update the task's HTML info
   task.element = createTaskElement(task);
