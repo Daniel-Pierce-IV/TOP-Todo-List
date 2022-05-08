@@ -71,6 +71,21 @@ newTaskDialog.addEventListener('close', () => {
 
 editProjectDialog.addEventListener('close', editProjectHandler);
 
+editTaskDialog.addEventListener('close', () => {
+  if (editTaskDialog.returnValue === 'save') {
+    const data = Object.fromEntries(
+      new FormData(editTaskDialog.querySelector('form'))
+    );
+
+    editTask(editTaskDialog.task, data);
+    // TODO update the task's element
+    // TODO refresh UI
+  } else if (editTaskDialog.returnValue === 'delete') {
+    // TODO delete the task from the project
+    // TODO refresh UI
+  }
+});
+
 function createDefaultProject() {
   createProject({ title: 'Default Project' });
 
@@ -150,6 +165,7 @@ function createTaskElement(task) {
   const taskElement = projectTasksElement.lastElementChild;
 
   taskElement.addEventListener('click', () => {
+    editTaskDialog.task = task;
     editTaskDialog.showModal();
   });
 
@@ -215,6 +231,15 @@ function deleteCurrentProject() {
   } else {
     hideProjectSection();
   }
+}
+
+function editTask(task, data) {
+  task.title = data.title;
+  task.deadline = data.deadline;
+  task.description = data.description;
+
+  // Checkboxes show up in forms if checked, and not if theyre false
+  if (data.priority) task.priority = Priority.HIGH;
 }
 
 function hideProjectSection() {
