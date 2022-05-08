@@ -90,31 +90,30 @@ editTaskDialog.addEventListener('close', () => {
 function createDefaultProject() {
   createProject({ title: 'Default Project' });
 
-  let task1 = new Task('Example Task', {
+  createTask({
+    title: 'Example Task',
     description: 'A short description, if needed',
     deadline: '2022-05-07',
-    priority: Priority.LOW,
+    priority: false,
     isDone: false,
   });
 
-  let task2 = new Task('Second Example', {
+  createTask({
+    title: 'Second Example',
     description: 'This one is high priority, which is why the checkbox is red!',
     deadline: '2022-05-08',
-    priority: Priority.HIGH,
+    priority: true,
     isDone: false,
   });
 
-  task1.element = createTaskElement(task1);
-  task2.element = createTaskElement(task2);
-
-  currentProject.addTask(task1);
-  currentProject.addTask(task2);
+  updateProjectSection();
 }
 
 function createProject(data) {
   const project = new Project(data.title);
   projects.push(project);
   project.element = createProjectElement(project);
+  projectsElement.prepend(project.element);
   changeProject(project);
 }
 
@@ -131,10 +130,11 @@ function createTask(data) {
 }
 
 function createProjectElement(project) {
-  const element = `<li class="active project cursor-pointer p-2 hover:bg-gray-100 active:bg-gray-300">${project.title}</li>`;
-  projectsElement.insertAdjacentHTML('afterbegin', element);
+  const markup = `<li class="active project cursor-pointer p-2 hover:bg-gray-100 active:bg-gray-300">${project.title}</li>`;
 
-  const projectElement = projectsElement.firstElementChild;
+  const projectElement = new DOMParser().parseFromString(markup, 'text/html')
+    .body.firstChild;
+
   projectElement.addEventListener('click', changeProject.bind(null, project));
 
   return projectElement;
@@ -146,7 +146,7 @@ function createTaskElement(task) {
   const lowPriorityCheckboxClasses =
     'bg-neutral-200 border-neutral-500 hover:bg-neutral-300 active:bg-neutral-400';
 
-  const element = `
+  const markup = `
     <div class="task pt-4 first:pt-0 grid grid-cols-[auto,1fr,auto] items-center gap-x-4 gap-y-1.5">
       <div
         class="checkbox cursor-pointer w-6 h-6 border-2 ${
@@ -165,8 +165,8 @@ function createTaskElement(task) {
       }</p>
     </div>`;
 
-  projectTasksElement.insertAdjacentHTML('beforeend', element);
-  const taskElement = projectTasksElement.lastElementChild;
+  const taskElement = new DOMParser().parseFromString(markup, 'text/html').body
+    .firstChild;
 
   taskElement.addEventListener('click', () => {
     editTaskDialog.task = task;
