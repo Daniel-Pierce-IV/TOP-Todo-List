@@ -67,4 +67,15 @@ export default class Task {
   complete() {
     this.#isDone = true;
   }
+
+  toJSON() {
+    return {
+      id: 1,
+      title: this.#title,
+      description: this.#description,
+      deadline: this.#deadline,
+      prioritySymbolKey: Symbol.keyFor(this.#priority),
+      isDone: true,
+    };
+  }
 }

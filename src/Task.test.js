@@ -89,4 +89,39 @@ describe('Tasks', () => {
     const task2 = new Task('Task #2');
     expect(task2.id).toBe(2);
   });
+
+  test('can be converted to JSON', () => {
+    // clear count increases from previous instantiations of other tests
+    Task.count = 0;
+
+    const task = new Task('Some Title', {
+      description: 'A neat description',
+      deadline: '2022-05-09',
+      priority: Priority.HIGH,
+      isDone: true,
+    });
+
+    expect(task.toJSON()).toEqual({
+      id: 1,
+      title: 'Some Title',
+      description: 'A neat description',
+      deadline: '2022-05-09',
+      prioritySymbolKey: 'high',
+      isDone: true,
+    });
+
+    task.title = 'Different Title';
+    task.description = 'Something different';
+    task.deadline = '3000-01-01';
+    task.priority = Priority.LOW;
+
+    expect(task.toJSON()).toEqual({
+      id: 1,
+      title: 'Different Title',
+      description: 'Something different',
+      deadline: '3000-01-01',
+      prioritySymbolKey: 'low',
+      isDone: true,
+    });
+  });
 });
