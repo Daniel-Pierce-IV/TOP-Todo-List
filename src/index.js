@@ -120,6 +120,10 @@ function populateProjects() {
     projectsElement.prepend(project.element);
   }
 
+  projectsElement
+    .querySelectorAll('.active')
+    .forEach((element) => element.classList.remove('active'));
+
   Project.count = localStorage.length;
 }
 
