@@ -75,7 +75,7 @@ export default class Task {
       description: this.#description,
       deadline: this.#deadline,
       prioritySymbolKey: Symbol.keyFor(this.#priority),
-      isDone: true,
+      isDone: this.#isDone,
     };
   }
 }
