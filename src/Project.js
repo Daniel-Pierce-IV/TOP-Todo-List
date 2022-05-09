@@ -1,10 +1,18 @@
 export default class Project {
+  static count = 0;
+
+  #id;
   #title;
   #tasks;
 
   constructor(title, tasks = []) {
+    this.#id = ++Project.count;
     this.title = title;
     this.#tasks = tasks;
+  }
+
+  get id() {
+    return this.#id;
   }
 
   get title() {

@@ -70,4 +70,15 @@ describe('Projects', () => {
     expect(project.tasks[0].title).toBe(taskArray[0].title);
     expect(project.tasks[1].title).toBe(taskArray[2].title);
   });
+
+  test('have unique ids', () => {
+    // clear count increases from previous instantiations of other tests
+    Project.count = 0;
+
+    const project1 = new Project('Project #1');
+    expect(project1.id).toBe(1);
+
+    const project2 = new Project('Project #2');
+    expect(project2.id).toBe(2);
+  });
 });
