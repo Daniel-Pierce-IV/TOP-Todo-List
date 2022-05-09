@@ -2,6 +2,11 @@ import Project from './Project';
 import Task from './Task';
 
 describe('Projects', () => {
+  afterEach(() => {
+    // Reset Project's static properties
+    Project.count = 0;
+  });
+
   test('have a title', () => {
     const project = new Project('Project Title');
     expect(project.title).toBe('Project Title');
@@ -72,9 +77,6 @@ describe('Projects', () => {
   });
 
   test('have unique ids', () => {
-    // clear count increases from previous instantiations of other tests
-    Project.count = 0;
-
     const project1 = new Project('Project #1');
     expect(project1.id).toBe(1);
 
@@ -83,9 +85,6 @@ describe('Projects', () => {
   });
 
   test('can be converted to JSON', () => {
-    // clear count increases from previous instantiations of other tests
-    Project.count = 0;
-
     const project = new Project('My Title');
 
     expect(project.toJSON()).toEqual({
@@ -114,9 +113,6 @@ describe('Projects', () => {
   });
 
   test('JSON ids increment on each instantiation', () => {
-    // clear count increases from previous instantiations of other tests
-    Project.count = 0;
-
     expect(new Project('First').toJSON().id).toBe(1);
     expect(new Project('Second').toJSON().id).toBe(2);
   });
