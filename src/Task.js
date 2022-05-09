@@ -78,4 +78,15 @@ export default class Task {
       isDone: this.#isDone,
     };
   }
+
+  static fromJSON(json) {
+    Task.count = json.id - 1;
+
+    return new Task(json.title, {
+      description: json.description,
+      deadline: json.deadline,
+      priority: Symbol.for(json.prioritySymbolKey),
+      isDone: json.isDone,
+    });
+  }
 }

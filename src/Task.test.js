@@ -124,4 +124,22 @@ describe('Tasks', () => {
       isDone: true,
     });
   });
+
+  test('can be converted from JSON', () => {
+    const task = Task.fromJSON({
+      id: 1,
+      title: 'A Title',
+      description: 'etc etc',
+      deadline: '2022-05-09',
+      prioritySymbolKey: 'low',
+      isDone: true,
+    });
+
+    expect(task.id).toBe(1);
+    expect(task.title).toBe('A Title');
+    expect(task.description).toBe('etc etc');
+    expect(task.deadline).toBe('2022-05-09');
+    expect(task.priority).toBe(Priority.LOW);
+    expect(task.isDone).toBe(true);
+  });
 });
