@@ -17,21 +17,17 @@ const newTaskDialog = document.querySelector('#new-task-dialog');
 
 const editTaskDialog = document.querySelector('#edit-task-dialog');
 
-// TODO import existing projects. If empty, create default project
 const projects = [];
 let currentProject;
 
 if (localStorage.length > 0) {
-  // TODO load projects/tasks from JSON
-  Object.values(localStorage).forEach((JSONString) =>
-    console.log(JSON.parse(JSONString))
-  );
+  populateProjects();
 } else {
   createDefaultProject();
 }
 
 // Latest-created project is the default on page load
-updateCurrentProject(projects[projects.length - 1]);
+changeProject(projects[projects.length - 1]);
 
 newProjectButton.addEventListener('click', () => {
   // Always present user with an empty form
@@ -75,6 +71,8 @@ newTaskDialog.addEventListener('close', () => {
   }
 });
 
+// TODO save Project / Task edits
+
 editProjectDialog.addEventListener('close', editProjectHandler);
 
 editTaskDialog.addEventListener('close', () => {
@@ -111,6 +109,18 @@ function createDefaultProject() {
   });
 
   updateProjectSection();
+}
+
+function populateProjects() {
+  for (let i = 1; i <= localStorage.length; i++) {
+    const project = Project.fromJSON(JSON.parse(localStorage[i]));
+    projects.push(project);
+    project.element = createProjectElement(project);
+    project.tasks.forEach((task) => (task.element = createTaskElement(task)));
+    projectsElement.prepend(project.element);
+  }
+
+  Project.count = localStorage.length;
 }
 
 function createProject(data) {
