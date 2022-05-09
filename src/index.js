@@ -18,11 +18,15 @@ const newTaskDialog = document.querySelector('#new-task-dialog');
 const editTaskDialog = document.querySelector('#edit-task-dialog');
 
 // TODO import existing projects. If empty, create default project
-
 const projects = [];
 let currentProject;
 
-if (projects.length === 0) {
+if (localStorage.length > 0) {
+  // TODO load projects/tasks from JSON
+  Object.values(localStorage).forEach((JSONString) =>
+    console.log(JSON.parse(JSONString))
+  );
+} else {
   createDefaultProject();
 }
 
@@ -111,10 +115,15 @@ function createDefaultProject() {
 
 function createProject(data) {
   const project = new Project(data.title);
+  saveProject(project);
   projects.push(project);
   project.element = createProjectElement(project);
   projectsElement.prepend(project.element);
   changeProject(project);
+}
+
+function saveProject(project) {
+  localStorage.setItem(project.id, JSON.stringify(project.toJSON()));
 }
 
 function createTask(data) {
@@ -126,6 +135,7 @@ function createTask(data) {
   });
 
   currentProject.addTask(task);
+  saveProject(currentProject);
   task.element = createTaskElement(task);
 }
 
