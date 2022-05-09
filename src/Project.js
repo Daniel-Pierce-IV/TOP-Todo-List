@@ -1,3 +1,5 @@
+import Task from './Task';
+
 export default class Project {
   static count = 0;
 
@@ -42,5 +44,14 @@ export default class Project {
       title: this.#title,
       tasks: this.tasks.map((task) => task.toJSON()),
     };
+  }
+
+  static fromJSON(json) {
+    Project.count = json.id - 1;
+
+    return new Project(
+      json.title,
+      json.tasks.map((taskJSON) => Task.fromJSON(taskJSON))
+    );
   }
 }

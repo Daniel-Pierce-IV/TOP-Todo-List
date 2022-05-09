@@ -109,4 +109,37 @@ describe('Projects', () => {
       ],
     });
   });
+
+  test('can be converted from JSON', () => {
+    const projectJSON = {
+      id: 12,
+      title: 'Project Title',
+      tasks: [
+        {
+          id: 3,
+          title: 'Task #1',
+          description: 'A short description, if needed',
+          deadline: '2022-05-09',
+          prioritySymbolKey: 'low',
+          isDone: false,
+        },
+        {
+          id: 7,
+          title: 'Task #2',
+          description:
+            'This one is high priority, which is why the checkbox is red!',
+          deadline: '2022-05-10',
+          prioritySymbolKey: 'high',
+          isDone: false,
+        },
+      ],
+    };
+
+    const project = Project.fromJSON(projectJSON);
+
+    expect(project.id).toBe(12);
+    expect(project.title).toBe('Project Title');
+    expect(project.tasks[0].id).toBe(3);
+    expect(project.tasks[1].id).toBe(7);
+  });
 });
