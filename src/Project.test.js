@@ -83,6 +83,9 @@ describe('Projects', () => {
   });
 
   test('can be converted to JSON', () => {
+    // clear count increases from previous instantiations of other tests
+    Project.count = 0;
+
     const project = new Project('My Title');
 
     expect(project.toJSON()).toEqual({
