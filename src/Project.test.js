@@ -110,6 +110,14 @@ describe('Projects', () => {
     });
   });
 
+  test('JSON ids increment on each instantiation', () => {
+    // clear count increases from previous instantiations of other tests
+    Project.count = 0;
+
+    expect(new Project('First').toJSON().id).toBe(1);
+    expect(new Project('Second').toJSON().id).toBe(2);
+  });
+
   test('can be converted from JSON', () => {
     const projectJSON = {
       id: 12,

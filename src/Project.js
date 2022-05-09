@@ -40,7 +40,7 @@ export default class Project {
 
   toJSON() {
     return {
-      id: 1,
+      id: this.#id,
       title: this.#title,
       tasks: this.tasks.map((task) => task.toJSON()),
     };
