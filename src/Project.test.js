@@ -81,4 +81,32 @@ describe('Projects', () => {
     const project2 = new Project('Project #2');
     expect(project2.id).toBe(2);
   });
+
+  test('can be converted to JSON', () => {
+    const project = new Project('My Title');
+
+    expect(project.toJSON()).toEqual({
+      id: 1,
+      title: 'My Title',
+      tasks: [],
+    });
+
+    project.title = 'New Title';
+    project.addTask(new Task('Some Task'));
+
+    expect(project.toJSON()).toEqual({
+      id: 1,
+      title: 'New Title',
+      tasks: [
+        {
+          id: 1,
+          title: 'Some Task',
+          description: undefined,
+          deadline: undefined,
+          prioritySymbolKey: 'low',
+          isDone: true,
+        },
+      ],
+    });
+  });
 });

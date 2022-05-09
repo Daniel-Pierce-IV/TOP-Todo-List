@@ -35,4 +35,12 @@ export default class Project {
   removeTask(task) {
     this.#tasks = this.#tasks.filter((element) => element !== task);
   }
+
+  toJSON() {
+    return {
+      id: 1,
+      title: this.#title,
+      tasks: this.tasks.map((task) => task.toJSON()),
+    };
+  }
 }
