@@ -104,7 +104,7 @@ describe('Projects', () => {
           description: undefined,
           deadline: undefined,
           prioritySymbolKey: 'low',
-          isDone: true,
+          isDone: false,
         },
       ],
     });
