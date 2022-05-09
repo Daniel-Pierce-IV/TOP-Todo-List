@@ -78,4 +78,15 @@ describe('Tasks', () => {
 
     expect(task.isDone).toBe(true);
   });
+
+  test('have unique ids', () => {
+    // clear count increases from previous instantiations of other tests
+    Task.count = 0;
+
+    const task1 = new Task('Task #1');
+    expect(task1.id).toBe(1);
+
+    const task2 = new Task('Task #2');
+    expect(task2.id).toBe(2);
+  });
 });

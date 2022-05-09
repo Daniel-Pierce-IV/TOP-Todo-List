@@ -1,6 +1,9 @@
 import Priority from './Priority';
 
 export default class Task {
+  static count = 0;
+
+  #id;
   #title;
   #description;
   #deadline;
@@ -8,11 +11,16 @@ export default class Task {
   #isDone;
 
   constructor(title, { description, deadline, priority, isDone = false } = {}) {
+    this.#id = ++Task.count;
     this.title = title;
     this.description = description;
     this.deadline = deadline;
     this.priority = priority;
     this.#isDone = isDone;
+  }
+
+  get id() {
+    return this.#id;
   }
 
   get title() {
