@@ -118,6 +118,14 @@ function populateProjects() {
     project.element = createProjectElement(project);
     project.element.classList.remove('active');
     project.tasks.forEach((task) => (task.element = createTaskElement(task)));
+  });
+
+  // Sort projects in ascending id order
+  projects.sort((a, b) => {
+    return a.id - b.id;
+  });
+
+  projects.forEach((project) => {
     projectsElement.prepend(project.element);
 
     if (project.id > Project.count) {
