@@ -127,11 +127,9 @@ function populateProjects() {
 
   projects.forEach((project) => {
     projectsElement.prepend(project.element);
-
-    if (project.id > Project.count) {
-      Project.count = project.id;
-    }
   });
+
+  Project.count = projects[projects.length - 1].id;
 }
 
 function createProject(data) {
