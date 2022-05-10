@@ -209,7 +209,13 @@ function createTaskElement(task) {
 
   taskElement.querySelector('.checkbox').addEventListener('click', (event) => {
     event.stopPropagation();
-    taskElement.classList.add('done');
+
+    if (taskElement.classList.contains('done')) {
+      taskElement.classList.remove('done');
+    } else {
+      taskElement.classList.add('done');
+    }
+
     finishTask(task);
   });
 
@@ -306,7 +312,7 @@ function editTask(task, data) {
 }
 
 function finishTask(task) {
-  task.complete();
+  task.toggleComplete();
   saveProject(currentProject);
 }
 
