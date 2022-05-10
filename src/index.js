@@ -112,19 +112,21 @@ function createDefaultProject() {
 }
 
 function populateProjects() {
-  for (let i = 1; i <= localStorage.length; i++) {
-    const project = Project.fromJSON(JSON.parse(localStorage[i]));
+  Object.values(localStorage).forEach((jsonString) => {
+    const project = Project.fromJSON(JSON.parse(jsonString));
     projects.push(project);
     project.element = createProjectElement(project);
     project.tasks.forEach((task) => (task.element = createTaskElement(task)));
     projectsElement.prepend(project.element);
-  }
+
+    if (project.id > Project.count) {
+      Project.count = project.id;
+    }
+  });
 
   projectsElement
     .querySelectorAll('.active')
     .forEach((element) => element.classList.remove('active'));
-
-  Project.count = localStorage.length;
 }
 
 function createProject(data) {
