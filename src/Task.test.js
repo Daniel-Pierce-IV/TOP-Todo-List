@@ -74,9 +74,16 @@ describe('Tasks', () => {
 
   test('can be completed', () => {
     const task = new Task('Some Title');
-    task.complete();
+    task.toggleComplete();
 
     expect(task.isDone).toBe(true);
+  });
+
+  test('can be un-completed', () => {
+    const task = new Task('Some Title', { isDone: true });
+    task.toggleComplete();
+
+    expect(task.isDone).toBe(false);
   });
 
   test('have unique ids', () => {

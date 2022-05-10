@@ -64,8 +64,8 @@ export default class Task {
     return this.#isDone;
   }
 
-  complete() {
-    this.#isDone = true;
+  toggleComplete() {
+    this.#isDone = !this.#isDone;
   }
 
   toJSON() {
