@@ -116,6 +116,7 @@ function populateProjects() {
     const project = Project.fromJSON(JSON.parse(jsonString));
     projects.push(project);
     project.element = createProjectElement(project);
+    project.element.classList.remove('active');
     project.tasks.forEach((task) => (task.element = createTaskElement(task)));
     projectsElement.prepend(project.element);
 
@@ -123,10 +124,6 @@ function populateProjects() {
       Project.count = project.id;
     }
   });
-
-  projectsElement
-    .querySelectorAll('.active')
-    .forEach((element) => element.classList.remove('active'));
 }
 
 function createProject(data) {
