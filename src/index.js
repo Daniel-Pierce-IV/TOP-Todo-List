@@ -176,13 +176,18 @@ function createTaskElement(task) {
     'bg-neutral-200 border-neutral-500 hover:bg-neutral-300 active:bg-neutral-400';
 
   const markup = `
-    <div class="task pt-4 first:pt-0 grid grid-cols-[auto,1fr,auto] items-center gap-x-4 gap-y-1.5">
+    <div class="${
+      task.isDone ? 'done' : ''
+    } task pt-4 first:pt-0 grid grid-cols-[auto,1fr,auto] items-center gap-x-4 gap-y-1.5">
       <div
-        class="checkbox cursor-pointer w-6 h-6 border-2 ${
+        class="checkbox cursor-pointer w-6 h-6 border-2 relative ${
           task.priority === Priority.HIGH
             ? highPriorityCheckboxClasses
             : lowPriorityCheckboxClasses
         }">
+          <svg style="width:24px;height:24px" class="opacity-0 absolute scale-[1.65] left-1 bottom-[3px]" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
+          </svg>
       </div>
       <h3 class="title text-lg">${task.title}</h3>
       <div class="deadline text-lg bg-gray-200 px-2">${
@@ -200,6 +205,12 @@ function createTaskElement(task) {
     editTaskDialog.task = task;
     populateEditTaskDialog();
     editTaskDialog.showModal();
+  });
+
+  taskElement.querySelector('.checkbox').addEventListener('click', (event) => {
+    event.stopPropagation();
+    taskElement.classList.add('done');
+    finishTask(task);
   });
 
   return taskElement;
@@ -292,6 +303,11 @@ function editTask(task, data) {
 
   // Update the task's HTML info
   task.element = createTaskElement(task);
+}
+
+function finishTask(task) {
+  task.complete();
+  saveProject(currentProject);
 }
 
 function hideProjectSection() {

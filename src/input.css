@@ -19,3 +19,13 @@ body {
 #projects .active:active {
     background-color: rgb(209 213 219);
 }
+
+#tasks .done .title {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #555;
+}
+
+#tasks .done svg {
+    opacity: 100%;
+}
