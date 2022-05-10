@@ -71,8 +71,6 @@ newTaskDialog.addEventListener('close', () => {
   }
 });
 
-// TODO save Project / Task edits
-
 editProjectDialog.addEventListener('close', editProjectHandler);
 
 editTaskDialog.addEventListener('close', () => {
@@ -87,6 +85,8 @@ editTaskDialog.addEventListener('close', () => {
     currentProject.removeTask(editTaskDialog.task);
     updateProjectSection();
   }
+
+  saveProject(currentProject);
 });
 
 function createDefaultProject() {
@@ -230,6 +230,7 @@ function editProjectHandler() {
     );
 
     currentProject.title = data.title;
+    saveProject(currentProject);
     projectsElement.querySelector('.active').textContent = data.title;
     updateProjectSection();
   } else if (editProjectDialog.returnValue === 'delete') {
@@ -254,6 +255,7 @@ function populateEditTaskDialog() {
 function deleteCurrentProject() {
   const projectIndex = projects.indexOf(currentProject);
   projects.splice(projectIndex, 1);
+  localStorage.removeItem(currentProject.id);
   currentProject = null;
   projectsElement.querySelector('.active').remove();
 
